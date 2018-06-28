@@ -1,0 +1,48 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+form {
+	margin: 10px;
+}
+
+img {
+	margin: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+h3 {
+	margin: 0;
+}
+
+.result {
+	width: 500px;
+	margin: 50px 100px; 
+}
+
+.next-button {
+	margin: 0 150px;
+	width: 100px; 
+	font-size: 20px;
+}
+
+div:after {
+	margin-bottom: 20px; 
+}
+
+.hidden {
+	display: none;
+}
+
+.content-creator,
+.description {
+	margin: 10px 0;
+}
+
