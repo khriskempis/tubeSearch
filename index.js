@@ -16,11 +16,11 @@ function renderResults(item){
 				<a href="http://www.youtube.com/watch?v=${item.id.videoId}" target="_blank" class="js-result-name">
 					<img class ="youtube-thumbnail" src=${item.snippet.thumbnails.medium.url}>
 				</a>
-				<div class="content-info">
+				<section role="contentinfo" class="content-info">
 					<h3 class="result-title"><a href="http://www.youtube.com/watch?v=${item.id.videoId}" target="blank" class="js-result-title">${item.snippet.title}</a></h3>
 					<p class="description">${item.snippet.description}</p>
 					<p class="content-creator"><a href="http://www.youtube.com/channel/${item.snippet.channelId}" target="_blank" class="content-creator js-content-creator">${item.snippet.channelTitle}</a></p>
-				</div>
+				</section>
 			</div>`
 
 		return htmlString
