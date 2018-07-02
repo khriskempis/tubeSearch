@@ -1,11 +1,14 @@
 const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+const YOUTUBE_KEY = "AIzaSyB3HWY2aDPUtANaAbl1upxAJ2O2IbBrqQs"
 
 function getDataFromAPI(searchTerm, callback){
 
 	const query = {
 		part: "snippet",
-		key: "AIzaSyB3HWY2aDPUtANaAbl1upxAJ2O2IbBrqQs",
-		q: `${searchTerm} in:name`
+		key: YOUTUBE_KEY,
+		q: `${searchTerm} in:name`,
+		pageToken: "",
+		maxResults: 8
 	}
 
 	$.getJSON(YOUTUBE_SEARCH_URL, query, callback); 
@@ -29,14 +32,13 @@ function renderResults(item){
 
 function displayYouTubeSearchData(data){
 	const displayDiv = $('.js-search-results')
-
-	$.getJSON('/endpoint.jsp', function(data) {
-     console.log(data)    
-  });
+	const displayResults = $('.js-number-results');
 
 	const results = data.items.map(function(item, index){
 		return renderResults(item)
 	});
+
+	displayResults.text(`${data.pageInfo.resultsPerPage} Results`)
 
 	handleNextButton(data); 
 	
@@ -45,12 +47,10 @@ function displayYouTubeSearchData(data){
 
 function handleNextButton(data){
 
-	const nextButton = $('section').find('.js-next-button');
-	nextButton.removeClass('hidden')
-	
+	const nextButton = $('section').find('.js-next-button');	
 
 	nextButton.click(function(event){
-		console.log(data.nextPageToken);
+		handleSubmit()
 	});
 
 };
@@ -59,12 +59,15 @@ function handleSubmit(){
 	$('.js-search-form').submit(function(event){
 		event.preventDefault(); 
 
-		const queryTarget = $('.js-search-form').find('.query'); 
+		const queryTarget = $('.js-search-form').find('#query'); 
 		const query = queryTarget.val(); 
-
+		const labelResults = $('#js-results')
+		
 		getDataFromAPI(query, displayYouTubeSearchData)
 
 		queryTarget.val('');
+
+		labelResults.prop('hidden', false); 
 
 	});
 }
